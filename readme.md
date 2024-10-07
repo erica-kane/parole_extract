@@ -38,12 +38,8 @@ To run the scripts in this repository, you will need a series of R and Python li
 - `joblib`
 - `numpy`
 - `pandas`
-- `pathlib`
-- `random`
-- `re`
 - `sklearn`
 - `spacy`
-- `string`
 - `textract`
   
 The project also requires `antiword`, a tool for extracting text from Microsoft Word `.doc` files (a common file type of Parole Board decision letters).
