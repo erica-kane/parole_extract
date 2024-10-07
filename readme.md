@@ -99,31 +99,31 @@ The pipeline follows this flow:
 - `data/models/ner/`: pre-trained convicted crime NER model.
 
 **Output**: 
-- `data/primary_data/extract/mcadl/extract_mcadl.xlsx/`: MCA extracted convited crime entities.
-- `data/primary_data/extract/ohdl/extract_ohdl.xlsx/`: OH extracted convited crime entities.
+- `data/primary_data/extract/mcadl/extract_mcadl.xlsx/`: MCA extracted crime entities.
+- `data/primary_data/extract/ohdl/extract_ohdl.xlsx/`: OH extracted crime entities.
 
 ### 🔁 5. Simplification 
 
 **Script**: `scripts/simplification.ipynb`
 
 **Input**: 
-- `data/primary_data/extract/mcadl/extract_mcadl.xlsx/`: MCA extracted convited crime entities.
-- `data/primary_data/extract/ohdl/extract_ohdl.xlsx/`: OH extracted convited crime entities.
+- `data/primary_data/extract/mcadl/extract_mcadl.xlsx/`: MCA extracted crime entities.
+- `data/primary_data/extract/ohdl/extract_ohdl.xlsx/`: OH extracted  crime entities.
 - `data/models/offence_cat_model.pkl/`: pre-trained offence category classification model.
 - `data/models/offence_type_model_mcadl.pkl/`: pre-trained MCA offence type classification model.
 - `data/models/offence_type_model_ohdl.pkl/`: pre-trained OH offence type classification model.
 
 **Output**: 
-- `data/primary_data/extract/mcadl/simplified_mcadl.xlsx/`: simplified MCA extracted convited crime entities.
-- `data/primary_data/extract/ohdl/simplified_ohdl.xlsx/`: simplified OH extracted convited crime entities.
+- `data/primary_data/extract/mcadl/simplified_mcadl.xlsx/`: simplified MCA extracted crime entities.
+- `data/primary_data/extract/ohdl/simplified_ohdl.xlsx/`: simplified OH extracted crime entities.
 
 ### 🔗 6. Linkage 
 
 **Script**: `scripts/linkage.ipynb`
 
 **Input**: 
-- `data/primary_data/extract/mcadl/simplified_mcadl.xlsx/`: simplified MCA extracted convited crime entities.
-- `data/primary_data/extract/ohdl/simplified_ohdl.xlsx/`: simplified OH extracted convited crime entities.
+- `data/primary_data/extract/mcadl/simplified_mcadl.xlsx/`: simplified MCA extracted crime entities.
+- `data/primary_data/extract/ohdl/simplified_ohdl.xlsx/`: simplified OH extracted crime entities.
 - `data/primary_data/letters/mcadl/segmented_dls/`: segmented pseudonymised MCA decision letters (.txt).
 - `data/primary_data/letters/ohdl/segmented_dls/`: segmented pseudonymised OH decision letters (.txt).
 - `data/supplementary_data/supp_data.xlsx/`: Parole Board administrative data.
