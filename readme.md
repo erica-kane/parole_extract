@@ -173,6 +173,10 @@ If you use the code from this repository in your work, please cite my PhD thesis
 
 **Kane, E.** (2025) _Turning text into data: Exploring the potential of natural language processing techniques in extracting information from Parole Board decision letters_. PhD Thesis. University of Leeds.
 
+## License
+
+This repository is licensed under the MIT License.
+
 ## Contact 
 
 For questions, feel free to reach out via email: [erica.r.kane@gmail.com]().
