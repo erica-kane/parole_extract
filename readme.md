@@ -57,93 +57,93 @@ The scripts in this repository are intended to be executed sequentially, with ea
 
 The pipeline follows this flow:
 
-### ✉️ 1. Decision letter classification 
-
-**Script**: `scripts/dl_classification.R`
-
-**Input**: 
-- `data/original_data/`: Parole Board files (.doc, .docx, .pdf). 
-
-**Output**: 
-- `data/primary_data/letters/original_dls/`: MCA and OH decision letters (.doc, .docx).
-
-### 🔒 2. Pseudonymisation 
-
-**Script**: `scripts/pseudonymisation.ipynb`
-
-**Input**: 
-- `data/primary_data/letters/original_dls/`: MCA and OH decision letters (.doc, .docx).
-
-**Output**: 
-- `data/primary_data/letters/pseudon_dls/`: pseudonymised MCA and OH decision letters (.txt).
-
-### ✂️ 3. Segmentation
-
-**Script**: `scripts/segmentation.ipynb`
-
-**Input**: 
-- `data/primary_data/letters/pseudon_dls/`: pseudonymised MCA and OH decision letters (.txt).
-
-**Output**: 
-- `data/primary_data/letters/segmented_dls/`: segmented pseudonymised MCA and OH decision letters (.txt).
-
-### 🔍 4. Extraction 
-
-**Script**: `scripts/extraction.ipynb`
-
-**Input**: 
-- `data/primary_data/letters/segmented_dls/`: segmented pseudonymised MCA and OH decision letters (.txt).
-- `data/models/ner/`: pre-trained convicted crime NER model.
-
-**Output**: 
-- `data/primary_data/extract/extract_data/`: MCA and OH extracted crime entities (.xlsx).
-
-### 🔁 5. Simplification 
-
-**Script**: `scripts/simplification.ipynb`
-
-**Input**: 
-- `data/primary_data/extract/extract_data/`: MCA and OH extracted crime entities (.xlsx).
-- `data/models/offence_cat/`: pre-trained offence category classification model (.pkl).
-- `data/models/offence_type/`: pre-trained MCA and OH offence type classification models (.pkl).
-
-**Output**: 
-- `data/primary_data/extract/simplified_data/`: simplified MCA and OH extracted crime entities (.xlsx).
-
-### 🔗 6. Linkage 
-
-**Script**: `scripts/linkage.ipynb`
-
-**Input**: 
-- `data/primary_data/extract/simplified_data/`: simplified MCA and OH extracted crime entities (.xlsx).
-- `data/primary_data/letters/segmented_dls/`: segmented pseudonymised MCA and OH decision letters (.txt).
-- `data/supplementary_data/`: Parole Board administrative data (.xlsx).
-
-**Output**: 
-- `data/linked_data/linked/`: MCA and OH linked data (.xlsx).
-
-### 🛠️ 7. Preparation
-
-**Script**: `scripts/preparation.ipynb`
-
-**Input**: 
-- `data/linked_data/linked/`: MCA and OH linked data (.xlsx).
-
-**Output**: 
-- `data/linked_data/prepared/`: MCA and OH prepared linked data (.xlsx).
-
+>### ✉️ 1. Decision letter classification 
+>
+>**Script**: `scripts/dl_classification.R`
+>
+>**Input**: 
+>- `data/original_data/`: Parole Board files (.doc, .docx, .pdf). 
+>
+>**Output**: 
+>- `data/primary_data/letters/original_dls/`: MCA and OH decision letters (.doc, .docx).
+>
+>### 🔒 2. Pseudonymisation 
+>
+>**Script**: `scripts/pseudonymisation.ipynb`
+>
+>**Input**: 
+>- `data/primary_data/letters/original_dls/`: MCA and OH decision letters (.doc, .docx).
+>
+>**Output**: 
+>- `data/primary_data/letters/pseudon_dls/`: pseudonymised MCA and OH decision letters (.txt).
+>
+>### ✂️ 3. Segmentation
+>
+>**Script**: `scripts/segmentation.ipynb`
+>
+>**Input**: 
+>- `data/primary_data/letters/pseudon_dls/`: pseudonymised MCA and OH decision letters (.txt).
+>
+>**Output**: 
+>- `data/primary_data/letters/segmented_dls/`: segmented pseudonymised MCA and OH decision letters (.txt).
+>
+>### 🔍 4. Extraction 
+>
+>**Script**: `scripts/extraction.ipynb`
+>
+>**Input**: 
+>- `data/primary_data/letters/segmented_dls/`: segmented pseudonymised MCA and OH decision letters (.txt).
+>- `data/models/ner/`: pre-trained convicted crime NER model.
+>
+>**Output**: 
+>- `data/primary_data/extract/extract_data/`: MCA and OH extracted crime entities (.xlsx).
+>
+>### 🔁 5. Simplification 
+>
+>**Script**: `scripts/simplification.ipynb`
+>
+>**Input**: 
+>- `data/primary_data/extract/extract_data/`: MCA and OH extracted crime entities (.xlsx).
+>- `data/models/offence_cat/`: pre-trained offence category classification model (.pkl).
+>- `data/models/offence_type/`: pre-trained MCA and OH offence type classification models (.pkl).
+>
+>**Output**: 
+>- `data/primary_data/extract/simplified_data/`: simplified MCA and OH extracted crime entities (.xlsx).
+>
+>### 🔗 6. Linkage 
+>
+>**Script**: `scripts/linkage.ipynb`
+>
+>**Input**: 
+>- `data/primary_data/extract/simplified_data/`: simplified MCA and OH extracted crime entities (.xlsx).
+>- `data/primary_data/letters/segmented_dls/`: segmented pseudonymised MCA and OH decision letters (.txt).
+>- `data/supplementary_data/`: Parole Board administrative data (.xlsx).
+>
+>**Output**: 
+>- `data/linked_data/linked/`: MCA and OH linked data (.xlsx).
+>
+>### 🛠️ 7. Preparation
+>
+>**Script**: `scripts/preparation.ipynb`
+>
+>**Input**: 
+>- `data/linked_data/linked/`: MCA and OH linked data (.xlsx).
+>
+>**Output**: 
+>- `data/linked_data/prepared/`: MCA and OH prepared linked data (.xlsx).
+>
 The `DocLoader` class is used within the **Pseudonymisation** and **Extraction** stages of the process. It automatically handles document processing, so there’s no need to manually run this script as part of the pipeline:
 
-### 📦 Document caching
-
-**Script**: `scripts/docloader.py`
-
-**Input**: 
-- `data/primary_data/letters/original_dls/`: MCA and OH decision letters (.doc, .docx).
-- `data/primary_data/letters/segmented_dls/`: segmented pseudonymised MCA and OH decision letters (.txt).
-
-**Output**: 
-- `data/primary_data/letters/caches/`: Cached versions of the processed MCA and OH decision letters (.spacy).
+>### 📦 Document caching
+>
+>**Script**: `scripts/docloader.py`
+>
+>**Input**: 
+>- `data/primary_data/letters/original_dls/`: MCA and OH decision letters (.doc, .docx).
+>- `data/primary_data/letters/segmented_dls/`: segmented pseudonymised MCA and OH decision letters (.txt).
+>
+>**Output**: 
+>- `data/primary_data/letters/caches/`: Cached versions of the processed MCA and OH decision letters (.spacy).
 
 **NB.** The original code for this project was developed in a secure environment and run on over 20,000 letters, allowing for thousands of letter types to be tested. The code in this repository is a refactored version of the original code, as it was rewritten outside of the secure environment. Therefore, there may be some inconsistencies between the original code and this refactored version.
 
