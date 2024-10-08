@@ -112,9 +112,9 @@ run_file_classification <- function(folder_path, folder_path_mcadl, folder_path_
 
 # Copy relevant letters to the appropriate directories
 run_file_classification(
-  '../data/primary_data/letters/original_docs/', 
-  '../data/primary_data/letters/mcadl/original_dls/',
-  '../data/primary_data/letters/ohdl/original_dls/'
+  'data/original_data/', 
+  'data/primary_data/letters/original_dls/mcadl/',
+  'data/primary_data/letters/original_dls/ohdl/'
 )
 
 
