@@ -7,8 +7,9 @@ Currently, the Parole Board stores only limited administrative and demographic d
 ## Repository structure
 
 ### `data/`
+- **original_data**: Synthetic Parole Board documents.
 - **primary_data**: Synthetic Parole Board decision letters in various formats.
-- **supplementary_data**: Files used to enhance information extraction, including synthetic administrative data.
+- **supplementary_data**: Synthetic Parole Board administrative data.
 - **linked_data**: Files combining primary and supplementary data after linkage.
 - **models**: The pre-trained models used throughout the processing stages. 
  
@@ -42,7 +43,13 @@ To run the scripts in this repository, you will need a series of R and Python li
 - `spacy`
 - `textract`
   
-The project also requires `antiword`, a tool for extracting text from Microsoft Word `.doc` files (a common file type of Parole Board decision letters).
+You will also need to install the `en_core_web_trf` model from `spaCy`. To install the model, run the following command:
+
+```bash
+python -m spacy download en_core_web_trf
+```
+
+The project also requires `antiword`, a tool for extracting text from Microsoft Word `.doc` files (a common file type of Parole Board decision letters). This installation process will depend on your operating system.
 
 ## Usage
 
@@ -55,97 +62,98 @@ The pipeline follows this flow:
 **Script**: `scripts/dl_classification.R`
 
 **Input**: 
-- `data/primary_data/letters/original_docs/`: Parole Board files (.doc, .docx, .pdf). 
+- `data/original_data/`: Parole Board files (.doc, .docx, .pdf). 
 
 **Output**: 
-- `data/primary_data/letters/mcadl/original_dls/`: MCA decision letters (.doc, .docx).
-- `data/primary_data/letters/ohdl/original_dls/`: OH decision letters (.doc, .docx).
+- `data/primary_data/letters/original_dls/`: MCA and OH decision letters (.doc, .docx).
 
 ### 🔒 2. Pseudonymisation 
 
 **Script**: `scripts/pseudonymisation.ipynb`
 
 **Input**: 
-- `data/primary_data/letters/mcadl/original_dls/`: MCA decision letters (.doc, .docx).
-- `data/primary_data/letters/ohdl/original_dls/`: OH decision letters (.doc, .docx).
+- `data/primary_data/letters/original_dls/`: MCA and OH decision letters (.doc, .docx).
 
 **Output**: 
-- `data/primary_data/letters/mcadl/pseudon_dls/`: pseudonymised MCA decision letters (.txt).
-- `data/primary_data/letters/ohdl/pseudon_dls/`: pseudonymised OH decision letters (.txt).
+- `data/primary_data/letters/pseudon_dls/`: pseudonymised MCA and OH decision letters (.txt).
 
 ### ✂️ 3. Segmentation
 
 **Script**: `scripts/segmentation.ipynb`
 
 **Input**: 
-- `data/primary_data/letters/mcadl/pseudon_dls/`: pseudonymised MCA decision letters (.txt).
-- `data/primary_data/letters/ohdl/pseudon_dls/`: pseudonymised OH decision letters (.txt).
+- `data/primary_data/letters/pseudon_dls/`: pseudonymised MCA and OH decision letters (.txt).
 
 **Output**: 
-- `data/primary_data/letters/mcadl/segmented_dls/`: segmented pseudonymised MCA decision letters (.txt).
-- `data/primary_data/letters/ohdl/segmented_dls/`: segmented pseudonymised OH decision letters (.txt).
+- `data/primary_data/letters/segmented_dls/`: segmented pseudonymised MCA and OH decision letters (.txt).
 
 ### 🔍 4. Extraction 
 
 **Script**: `scripts/extraction.ipynb`
 
 **Input**: 
-- `data/primary_data/letters/mcadl/segmented_dls/`: segmented pseudonymised MCA decision letters (.txt).
-- `data/primary_data/letters/ohdl/segmented_dls/`: segmented pseudonymised OH decision letters (.txt).
+- `data/primary_data/letters/segmented_dls/`: segmented pseudonymised MCA and OH decision letters (.txt).
 - `data/models/ner/`: pre-trained convicted crime NER model.
 
 **Output**: 
-- `data/primary_data/extract/mcadl/extract_mcadl.xlsx/`: MCA extracted crime entities.
-- `data/primary_data/extract/ohdl/extract_ohdl.xlsx/`: OH extracted crime entities.
+- `data/primary_data/extract/extract_data/`: MCA and OH extracted crime entities (.xlsx).
 
 ### 🔁 5. Simplification 
 
 **Script**: `scripts/simplification.ipynb`
 
 **Input**: 
-- `data/primary_data/extract/mcadl/extract_mcadl.xlsx/`: MCA extracted crime entities.
-- `data/primary_data/extract/ohdl/extract_ohdl.xlsx/`: OH extracted  crime entities.
-- `data/models/offence_cat_model.pkl/`: pre-trained offence category classification model.
-- `data/models/offence_type_model_mcadl.pkl/`: pre-trained MCA offence type classification model.
-- `data/models/offence_type_model_ohdl.pkl/`: pre-trained OH offence type classification model.
+- `data/primary_data/extract/extract_data/`: MCA and OH extracted crime entities (.xlsx).
+- `data/models/offence_cat/`: pre-trained offence category classification model (.pkl).
+- `data/models/offence_type/`: pre-trained MCA and OH offence type classification models (.pkl).
 
 **Output**: 
-- `data/primary_data/extract/mcadl/simplified_mcadl.xlsx/`: simplified MCA extracted crime entities.
-- `data/primary_data/extract/ohdl/simplified_ohdl.xlsx/`: simplified OH extracted crime entities.
+- `data/primary_data/extract/simplified_data/`: simplified MCA and OH extracted crime entities (.xlsx).
 
 ### 🔗 6. Linkage 
 
 **Script**: `scripts/linkage.ipynb`
 
 **Input**: 
-- `data/primary_data/extract/mcadl/simplified_mcadl.xlsx/`: simplified MCA extracted crime entities.
-- `data/primary_data/extract/ohdl/simplified_ohdl.xlsx/`: simplified OH extracted crime entities.
-- `data/primary_data/letters/mcadl/segmented_dls/`: segmented pseudonymised MCA decision letters (.txt).
-- `data/primary_data/letters/ohdl/segmented_dls/`: segmented pseudonymised OH decision letters (.txt).
-- `data/supplementary_data/supp_data.xlsx/`: Parole Board administrative data.
+- `data/primary_data/extract/simplified_data/`: simplified MCA and OH extracted crime entities (.xlsx).
+- `data/primary_data/letters/segmented_dls/`: segmented pseudonymised MCA and OH decision letters (.txt).
+- `data/supplementary_data/`: Parole Board administrative data (.xlsx).
 
 **Output**: 
-- `data/linked_data/mcadl/linked_mcadl.xlsx/`: MCA linked data.
-- `data/linked_data/ohdl/linked_ohdl.xlsx/`: OH linked data. 
+- `data/linked_data/linked/`: MCA and OH linked data (.xlsx).
 
 ### 🛠️ 7. Preparation
 
 **Script**: `scripts/preparation.ipynb`
 
 **Input**: 
-- `data/linked_data/mcadl/linked_mcadl.xlsx/`: MCA linked data.
-- `data/linked_data/ohdl/linked_ohdl.xlsx/`: OH linked data. 
-- `data/supplementary_data/severity_scores.xlsx/`: Offence category severity scores. 
+- `data/linked_data/linked/`: MCA and OH linked data (.xlsx).
 
 **Output**: 
-- `data/linked_data/mcadl/prepared_mcadl.xlsx/`: MCA prepared linked data.
-- `data/linked_data/ohdl/prepared_ohdl.xlsx/`: OH prepared linked data. 
+- `data/linked_data/prepared/`: MCA and OH prepared linked data (.xlsx).
+
+There is also a DocLoader class which is utilised within the _Pseudonymisation_ and _Extraction_ stages. This script does not need to be manually run as part of the process.
+
+The `DocLoader` class is used within the **Pseudonymisation** and **Extraction** stages of the process. It automatically handles document processing, so there’s no need to manually run this script as part of the pipeline:
+
+### 📦 Document caching
+
+**Script**: `scripts/docloader.py`
+
+**Input**: 
+- `data/primary_data/letters/original_dls/`: MCA and OH decision letters (.doc, .docx).
+- `data/primary_data/letters/segmented_dls/`: segmented pseudonymised MCA and OH decision letters (.txt).
+
+**Output**: 
+- `data/primary_data/letters/caches/`: Cached versions of the processed MCA and OH decision letters (.spacy).
+
+**NB.** The original code for this project was developed in a secure environment and run on over 20,000 letters, allowing for thousands of letter types to be tested. The code in this repository is a refactored version of the original code, as it was rewritten outside of the secure environment. Therefore, there may be some inconsistencies between the original code and this refactored version.
+
+_If you run this code and come across any mistakes, please let me know, and I will retrieve the original copy._
 
 ## Project
 
-The scripts and data were created during a three-year PhD project. Due to the sensitive nature of the data, real data was stored in secure Virtual Research Environments, where the scripts were also developed. As a result, this repository contains only synthetic data, along with the original code and models used in the project.
-
-The entire process is documented in a thesis, where specific sections correspond to each of the scripts:
+The scripts and data were created during a three-year PhD project. The entire process is documented in a thesis, where specific sections correspond to each of the scripts:
 
 Chapter 5.2: _Document caching_ - `docloader.py`  
 Chapter 5.3: _Decision letter classification_ - `dl_classification.R`  
