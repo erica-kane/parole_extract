@@ -132,8 +132,6 @@ The pipeline follows this flow:
 **Output**: 
 - `data/linked_data/prepared/`: MCA and OH prepared linked data (.xlsx).
 
-There is also a DocLoader class which is utilised within the _Pseudonymisation_ and _Extraction_ stages. This script does not need to be manually run as part of the process.
-
 The `DocLoader` class is used within the **Pseudonymisation** and **Extraction** stages of the process. It automatically handles document processing, so there’s no need to manually run this script as part of the pipeline:
 
 ### 📦 Document caching
