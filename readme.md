@@ -162,7 +162,7 @@ Chapter 7.2-7.4: _Data simplification_ - `simplification.ipynb`
 Chapter 8.2: _Linkage_ - `linkage.ipynb`  
 Chapter 8.3: _Sample preparation_ - `preparation.ipynb`  
 
-For more detailed information on the development of each process and its performance during the testing stages, please refer to the [thesis document]().
+For more detailed information on the development of each process and its performance during the testing stages, you can refer to the thesis document which will be linked here when completed.
 
 ## Citation
 
