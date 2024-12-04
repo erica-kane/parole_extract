@@ -11,7 +11,12 @@ Currently, the Parole Board stores only limited administrative and demographic d
 - **primary_data**: Synthetic Parole Board decision letters in various formats.
 - **supplementary_data**: Synthetic Parole Board administrative data.
 - **linked_data**: Files combining primary and supplementary data after linkage.
-- **models**: The pre-trained models used throughout the processing stages. 
+- **models**: The pre-trained models used throughout the processing stages.
+
+_Some data files are not available yet, and will be added at a later date:_
+- `data/original_data`
+- `data/primary_data/letters`
+- `data/models/ner` 
  
 ### `scripts/`
 
